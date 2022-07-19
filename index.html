@@ -10,7 +10,7 @@
 
 		</title>
 
-		<meta name="theme-color" content="teal" />
+		<meta name="theme-color" content="teal"/>
 
 		<meta name="description" content="TODO List Application">
 
@@ -439,6 +439,10 @@
 
 					}
 
+					document.getElementById("textarea1").focus()
+
+					document.getElementById("textarea1").select()
+
 				},
 
 				watch: {
@@ -468,6 +472,8 @@
 						document.getElementById("textarea1").value = ""
 
 						document.getElementById("textarea1").focus()
+
+						document.getElementById("textarea1").select()
 
 					},
 
@@ -520,8 +526,6 @@
 				}
 
 			})
-
-			document.getElementById("textarea1").focus()
 
 		</script>
 
