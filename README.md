@@ -7,6 +7,6 @@
 - localstorage
 - auto show keyboard on mobile
 - align form to bottom
-- multiple locales?
+- multiple locales? or fix auto translate
 - pwa
 - notifications?
