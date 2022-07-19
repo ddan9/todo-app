@@ -10,3 +10,5 @@
 - multiple locales? or fix auto translate
 - pwa
 - notifications?
+- settings?
+- search (delete?)
