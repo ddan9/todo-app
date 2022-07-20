@@ -525,6 +525,10 @@
 
 								this.todos = [ ]
 
+							} else {
+
+								return false
+
 							}
 
 						}
@@ -540,6 +544,8 @@
 						} else {
 
 							alert("Lost internet connection!")
+
+							return false
 
 						}
 
@@ -559,6 +565,10 @@
 
 							document.location.reload()
 
+						} else {
+
+							return false
+
 						}
 
 					},
@@ -568,6 +578,10 @@
 						if ( confirm("Remove task: \" " + this.todos[index].task + " \" ?") ) {
 
 							this.todos.splice(index, 1)
+
+						} else {
+
+							return false
 
 						}
 
@@ -595,7 +609,7 @@
 
 				created: function() {
 
-					console.log("Hello there! Seems like all is ok :) ")
+					console.log("Hello there! \nSeems like all is ok :) \nWelcome!")
 
 				}
 
