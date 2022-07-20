@@ -9,6 +9,7 @@
 - notifications?
 - html equiv page-enter page-exit
 - топики
+- построить все на компонентах? компоненты в компоненты и сделать часть на head
 
 <br/>
 
