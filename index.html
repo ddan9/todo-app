@@ -90,13 +90,17 @@
 
 			<main>
 
-				<task-list v-bind:todos="this.todos" v-bind:date="dateNow" v-bind:fullname="fullName" v-bind:removetask="removeTask">
+				<task-header v-bind:todos="this.todos" v-bind:date="dateNow" v-bind:fullname="fullName">
 
-				</task-list>
+				</task-header>
 
 				<form-task v-bind:addtask="addTask" v-bind:todos="this.todos" v-bind:clear="clear">
 
 				</form-task>
+
+				<task-list v-bind:todos="this.todos" v-bind:removetask="removeTask">
+
+				</task-list>
 
 			</main>
 
@@ -180,7 +184,7 @@
 
 			})
 
-			Vue.component("task-list", {
+			Vue.component("task-header", {
 
 				props: {
 
@@ -189,8 +193,6 @@
 					date: String,
 
 					fullname: String,
-
-					removetask: Function
 
 				},
 
@@ -220,7 +222,27 @@
 
 						</li>
 
-						<li v-for="(todo, index) in todos" class="collection-item" style="overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; white-space: normal">
+					</ul>
+
+				`
+
+			})
+
+			Vue.component("task-list", {
+
+				props: {
+
+					todos: Array,
+
+					removetask: Function
+
+				},
+
+				template: `
+
+					<ul class="collection with-header">
+
+						<li v-for="(todo, index) in todos.slice().reverse()" class="collection-item" style="overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; white-space: normal">
 
 							<div>
 
