@@ -519,6 +519,8 @@
 
 					clear: function() {
 
+						event.preventDefault()
+
 						if ( this.todos != "" && this.todos != null) {
 
 							if ( confirm("Do you really want to remove all your tasks?") ) {
@@ -536,6 +538,8 @@
 					},
 
 					checkConnection: function() {
+
+						event.preventDefault()
 
 						if (navigator.onLine) {
 
@@ -561,6 +565,8 @@
 
 					reload: function() {
 
+						event.preventDefault()
+
 						if (navigator.onLine) {
 
 							document.location.reload()
@@ -574,6 +580,8 @@
 					},
 
 					removeTask: function(index) {
+
+						event.preventDefault()
 
 						if ( confirm("Remove task: \" " + this.todos[index].task + " \" ?") ) {
 
