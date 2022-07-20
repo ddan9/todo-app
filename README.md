@@ -1,6 +1,6 @@
 # todo-app
 
-[App: https://ddan9.github.io/todo-app](https://ddan9.github.io/todo-app)
+[App: ddan9.github.io/todo-app](https://ddan9.github.io/todo-app)
 
 #### todo:
 
