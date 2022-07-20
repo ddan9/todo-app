@@ -5,7 +5,6 @@
 #### todo:
 
 - loading page
-- align form to bottom
 - notifications?
 - вместо кнопки удалить кнопка more с выпадающим меню в котором можно удалить и перемещать таски вверх и вниз
 - search (delete?)
