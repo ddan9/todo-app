@@ -100,7 +100,7 @@
 
 			</main>
 
-			<custom-footer>
+			<custom-footer v-bind:todos="this.todos" v-bind:date="dateNow">
 
 			</custom-footer>
 
@@ -160,7 +160,7 @@
 
 											<i class="material-icons">
 
-												refresh
+												settings
 
 											</i>
 
@@ -314,6 +314,14 @@
 
 			Vue.component("custom-footer", {
 
+				props: {
+
+					todos: Array,
+
+					date: String
+
+				},
+
 				template: `
 
 					<footer class="teal darken-1 page-footer" style="bottom: 0; left: 0; width: 100%; ">
@@ -332,11 +340,11 @@
 
 									<p class="grey-text text-lighten-4">
 
-										Created just while learning Vue.js and Materialize.css
+										Created just while learning Web, <a class="grey-text text-lighten-3" href="https://pages.github.com"> GH-Pages</a>, <a class="grey-text text-lighten-3" href="https://vuejs.org"> Vue.js </a> and <a class="grey-text text-lighten-3" href="https://materializecss.com"> Materialize.css</a>. This app will helps you to manage your tasks
 
 									</p>
 
-									<p class="grey-text text-lighten-4">
+									<p v-if="todos.length < 1" class="grey-text text-lighten-4">
 
 										You can enter your tasks here
 
@@ -405,7 +413,7 @@
 
 							<div class="container center">
 
-								© 2022 Licenced by GNU GPL v3
+								<a class="grey-text text-lighten-3" href="https://ddan9.github.io/todo-app/LICENSE"> © {{ new Date().getFullYear() }} Licenced by GNU GPL v3 </a>
 
 							</div>
 
@@ -435,7 +443,7 @@
 
 					if (localStorage.todos) {
 
-						this.todos = localStorage.todos
+						this.todos = JSON.parse(localStorage["todos"])
 
 					}
 
@@ -447,9 +455,9 @@
 
 				watch: {
 
-					name(todosDB) {
+					todos(TodosDB) {
 
-						localStorage.todos = todosDB
+						localStorage["todos"] = JSON.stringify(TodosDB)
 
 					}
 
@@ -481,7 +489,7 @@
 
 						if ( this.todos != "" && this.todos != null) {
 
-							document.location.reload()
+							this.todos = [ ]
 
 						}
 
