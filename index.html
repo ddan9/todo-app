@@ -100,7 +100,7 @@
 
 			</main>
 
-			<custom-footer v-bind:todos="this.todos" v-bind:date="dateNow">
+			<custom-footer v-bind:checkconnection="checkConnection" v-bind:todos="this.todos" v-bind:date="dateNow">
 
 			</custom-footer>
 
@@ -316,6 +316,8 @@
 
 				props: {
 
+					checkconnection: Function,
+
 					todos: Array,
 
 					date: String
@@ -340,7 +342,7 @@
 
 									<p class="grey-text text-lighten-4">
 
-										Created just while learning Web, <a class="grey-text text-lighten-3" href="https://pages.github.com"> GH-Pages</a>, <a class="grey-text text-lighten-3" href="https://vuejs.org"> Vue.js </a> and <a class="grey-text text-lighten-3" href="https://materializecss.com"> Materialize.css</a>. This app will helps you to manage your tasks
+										Created just while learning Web, <a class="grey-text text-lighten-3" href="https://pages.github.com" v-on:click.stop.prevent="checkconnection"> GH-Pages</a>, <a class="grey-text text-lighten-3" href="https://vuejs.org" v-on:click.stop.prevent="checkconnection"> Vue.js </a> and <a class="grey-text text-lighten-3" href="https://materializecss.com" v-on:click.stop.prevent="checkconnection"> Materialize.css</a>. This app will helps you to manage your tasks
 
 									</p>
 
@@ -363,7 +365,7 @@
 									<ul>
 										<li>
 
-											<a class="grey-text text-lighten-3" href="https://ddan9.github.io">
+											<a class="grey-text text-lighten-3" href="https://ddan9.github.io" v-on:click.stop.prevent="checkconnection">
 
 												GitHub
 
@@ -373,7 +375,7 @@
 
 										<li>
 
-											<a class="grey-text text-lighten-3" href="https://freelance.habr.com/freelancers/r3ddan9">
+											<a class="grey-text text-lighten-3" href="https://freelance.habr.com/freelancers/r3ddan9" v-on:click.stop.prevent="checkconnection">
 
 												Habr
 
@@ -383,7 +385,7 @@
 
 										<li>
 
-											<a class="grey-text text-lighten-3" href="mailto:ddan9.github@rambler.ru">
+											<a class="grey-text text-lighten-3" href="mailto:ddan9.github@rambler.ru" v-on:click.stop.prevent="checkconnection">
 
 												Email
 
@@ -393,7 +395,7 @@
 
 										<li>
 
-											<a class="grey-text text-lighten-3" href="https://t.me/ddan9_tg">
+											<a class="grey-text text-lighten-3" href="https://t.me/ddan9_tg" v-on:click.stop.prevent="checkconnection">
 
 												Telegram
 
@@ -413,7 +415,7 @@
 
 							<div class="container center">
 
-								<a class="grey-text text-lighten-3" href="https://ddan9.github.io/todo-app/LICENSE"> © {{ new Date().getFullYear() }} Licenced by GNU GPL v3 </a>
+								<a class="grey-text text-lighten-3" href="https://ddan9.github.io/todo-app/LICENSE" v-on:click.stop.prevent="checkconnection"> © {{ new Date().getFullYear() }} Licenced by GNU GPL v3 </a>
 
 							</div>
 
@@ -495,9 +497,27 @@
 
 					},
 
+					checkConnection: function() {
+
+						if (navigator.onLine) {
+
+							document.location.href = event.currentTarget.href
+
+						} else {
+
+							alert("Lost internet connection!")
+
+						}
+
+					},
+
 					reload: function() {
 
-						document.location.reload()
+						if (navigator.onLine) {
+
+							document.location.reload()
+
+						}
 
 					},
 
