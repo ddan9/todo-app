@@ -250,7 +250,7 @@
 
 					<ul class="collection with-header">
 
-						<li v-for="(todo, index) in todos.slice().reverse()" class="collection-item" style="overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; white-space: normal">
+						<li v-for="(todo, index) in todos" class="collection-item" style="overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; white-space: normal">
 
 							<div>
 
@@ -521,7 +521,11 @@
 
 						if ( this.todos != "" && this.todos != null) {
 
-							this.todos = [ ]
+							if ( confirm("Do you really want to remove all your tasks?") ) {
+
+								this.todos = [ ]
+
+							}
 
 						}
 
@@ -561,7 +565,11 @@
 
 					removeTask: function(index) {
 
-						this.todos.splice(index, 1)
+						if ( confirm("Remove task: \" " + this.todos[index].task + " \" ?") ) {
+
+							this.todos.splice(index, 1)
+
+						}
 
 					}
 
