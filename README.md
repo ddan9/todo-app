@@ -5,8 +5,6 @@
 #### todo:
 
 - loading page
-
-
 - auto show keyboard on mobile
 - align form to bottom
 - multiple locales? or fix auto translate
@@ -16,10 +14,12 @@
 - search (delete?)
 - single page app
 
+
 - links
 - description
 - dynamic year in cpr
 - localstorage
+
 
 - settings?
 - name changing (maybe login page)
