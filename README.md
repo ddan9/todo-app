@@ -12,3 +12,9 @@
 - notifications?
 - settings?
 - search (delete?)
+- single page app
+- links
+- description
+- dynamic year in cpr
+- вместо кнопки удалить кнопка more с выпадающим меню в котором можно удалить и перемещать таски вверх и вниз
+- темы в настройках
