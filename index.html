@@ -90,7 +90,7 @@
 
 		<div class="app" id="app">
 
-			<custom-navbar v-bind:reload="reload">
+			<custom-navbar v-bind:search="search" v-bind:reload="reload">
 
 			</custom-navbar>
 
@@ -122,11 +122,13 @@
 
 			Vue.component("custom-navbar", {
 
-				props: [
+				props: {
 
-					"reload"
+					search: Function,
 
-				],
+					reload: Function
+
+				},
 
 				template: `
 
@@ -152,7 +154,7 @@
 
 									<li>
 
-										<a href="#!">
+										<a v-on:click="search" href="#!">
 
 											<i class="material-icons">
 
@@ -278,11 +280,11 @@
 
 				props: {
 
-					"addtask": Function,
+					addtask: Function,
 
-					"todos": Array,
+					todos: Array,
 
-					"clear": Function
+					clear: Function
 
 				},
 
@@ -536,6 +538,14 @@
 							alert("Lost internet connection!")
 
 						}
+
+					},
+
+					search: function() {
+
+						var search = prompt("Write text for search")
+
+						window.find(search)
 
 					},
 
