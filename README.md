@@ -16,13 +16,6 @@
 
 <br/>
 
-- links
-- description
-- dynamic year in cpr
-- localstorage
-
-<br/>
-
 - settings?
 - name changing (maybe login page)
 - темы в настройках
