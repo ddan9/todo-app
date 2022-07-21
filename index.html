@@ -50,35 +50,15 @@
 
 		<style>
 
-			body
+			.fade-leave-active {
 
-			{
-
-				display: flex;
-
-				min-height: 100vh;
-
-				flex-direction: column;
+				transition: opacity 0.5s;
 
 			}
 
-			main
+			.fade-leave-to {
 
-			{
-
-				flex: 1 0 auto;
-
-			}
-
-			div.app
-
-			{
-
-				display: flex;
-
-				min-height: 100vh;
-
-				flex-direction: column;
+				opacity: 0;
 
 			}
 
@@ -86,15 +66,19 @@
 
 	</head>
 
-	<body>
+	<body style="display: flex; min-height: 100vh; flex-direction: column">
 
-		<div class="app" id="app">
+		<div class="app" id="app" style="display: flex; min-height: 100vh; flex-direction: column">
+
+			<app-loading v-bind:loadingshow="loadingShow">
+
+			</app-loading>
 
 			<custom-navbar v-bind:search="search" v-bind:reload="reload">
 
 			</custom-navbar>
 
-			<main>
+			<main style="flex: 1 0 auto">
 
 				<task-header v-bind:todos="this.todos" v-bind:date="dateNow" v-bind:fullname="fullName">
 
@@ -119,6 +103,60 @@
 		<script>
 
 			"use strict"
+
+			Vue.component("app-loading", {
+
+				props: {
+
+					loadingshow: Boolean
+
+				},
+
+				template: `
+
+					<transition name="fade">
+
+						<div v-show="loadingshow" style="z-index: 1000; background: white; position: fixed; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center">
+
+							<div class="preloader-wrapper big active">
+
+								<div class="spinner-layer spinner-teal-only">
+
+									<div class="circle-clipper left">
+
+										<div class="circle">
+
+										</div>
+
+									</div>
+
+									<div class="gap-patch">
+
+										<div class="circle">
+
+										</div>
+
+									</div>
+
+									<div class="circle-clipper right">
+
+										<div class="circle">
+
+										</div>
+
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</transition>
+
+				`
+
+			}),
 
 			Vue.component("custom-navbar", {
 
@@ -190,7 +228,7 @@
 
 				`
 
-			})
+			}),
 
 			Vue.component("task-header", {
 
@@ -467,21 +505,9 @@
 
 					lastName: "Sergeevich",
 
+					loadingShow: true,
+
 					todos: [ ]
-
-				},
-
-				mounted() {
-
-					if (localStorage.todos) {
-
-						this.todos = JSON.parse(localStorage["todos"])
-
-					}
-
-					document.getElementById("textarea1").focus()
-
-					document.getElementById("textarea1").select()
 
 				},
 
@@ -496,6 +522,16 @@
 				},
 
 				methods: {
+
+					loadingHide: function() {
+
+						setTimeout(() => {
+
+							this.loadingShow = false
+
+						}, 2500 )
+
+					},
 
 					addTask: function() {
 
@@ -618,6 +654,22 @@
 				created: function() {
 
 					console.log("Hello there! \nSeems like all is ok :) \nWelcome!")
+
+				},
+
+				mounted() {
+
+					if (localStorage.todos) {
+
+						this.todos = JSON.parse(localStorage["todos"])
+
+					}
+
+					document.getElementById("textarea1").focus()
+
+					document.getElementById("textarea1").select()
+
+					this.loadingHide()
 
 				}
 
