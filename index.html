@@ -80,17 +80,17 @@
 
 			<main style="flex: 1 0 auto">
 
-				<task-header v-bind:changefullname="changeFullName" v-bind:todos="this.todos" v-bind:date="dateNow" v-bind:fullname="fullName" v-bind:greetingtime="greetingTime">
+				<task-list v-bind:changefullname="changeFullName" v-bind:todos="this.todos" v-bind:date="dateNow" v-bind:fullname="fullName" v-bind:greetingtime="greetingTime" v-bind:removetask="removeTask">
 
-				</task-header>
+				</task-list>
 
 				<form-task v-bind:addtask="addTask" v-bind:todos="this.todos" v-bind:clear="clear">
 
 				</form-task>
 
-				<task-list v-bind:todos="this.todos" v-bind:removetask="removeTask">
+				<float-button v-bind:todos="this.todos" v-bind:changestatement="changeStatement" v-bind:statement="this.statement">
 
-				</task-list>
+				</float-button>
 
 			</main>
 
@@ -156,7 +156,7 @@
 
 				`
 
-			}),
+			})
 
 			Vue.component("custom-navbar", {
 
@@ -228,9 +228,9 @@
 
 				`
 
-			}),
+			})
 
-			Vue.component("task-header", {
+			Vue.component("task-list", {
 
 				props: {
 
@@ -242,7 +242,9 @@
 
 					fullname: String,
 
-					greetingtime: String
+					greetingtime: String,
+
+					removetask: Function
 
 				},
 
@@ -271,26 +273,6 @@
 							</h6>
 
 						</li>
-
-					</ul>
-
-				`
-
-			})
-
-			Vue.component("task-list", {
-
-				props: {
-
-					todos: Array,
-
-					removetask: Function
-
-				},
-
-				template: `
-
-					<ul class="collection with-header">
 
 						<li v-for="(todo, index) in todos" class="collection-item" style="overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; white-space: normal">
 
@@ -377,6 +359,38 @@
 							</div>
 
 						</form>
+
+					</div>
+
+				`
+
+			})
+
+			Vue.component("float-button", {
+
+				props: {
+
+					todos: Array,
+
+					changestatement: Function,
+
+					statement: String
+
+				},
+
+				template: `
+
+					<div v-if="todos.length > 10" style="z-index: 500; display: block; position: fixed; right: 3vh; bottom: 6vh">
+
+						<a v-on:click="changestatement" class="btn-floating btn-large waves-effect waves-light teal lighten-2">
+
+							<i class="material-icons">
+
+								{{ statement }}
+
+							</i>
+
+						</a>
 
 					</div>
 
@@ -507,11 +521,13 @@
 
 					title: "ddan9 | TODO",
 
-					firstName: "Danil",
+					firstName: "Name",
 
-					lastName: "Sergeevich",
+					lastName: "Patronymic",
 
 					loadingShow: true,
+
+					statement: "arrow_downward",
 
 					todos: [ ]
 
@@ -559,7 +575,11 @@
 
 						if (input) {
 
-							this.todos.unshift({ task: input })
+							this.todos.push({ task: input })
+
+						} else {
+
+							return false
 
 						}
 
@@ -670,6 +690,20 @@
 						} else {
 
 							return false
+
+						}
+
+					},
+
+					changeStatement: function() {
+
+						if ( this.statement != "arrow_downward") {
+
+							this.statement = "arrow_downward"
+
+						} else {
+
+							this.statement = "arrow_upward"
 
 						}
 
