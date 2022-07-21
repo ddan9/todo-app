@@ -4,7 +4,6 @@
 
 #### todo:
 
-- тест на акцессибилити
 - notifications?
 - html equiv page-enter page-exit
 - построить все на компонентах? компоненты в компоненты и сделать часть на head
