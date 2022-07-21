@@ -80,7 +80,7 @@
 
 			<main style="flex: 1 0 auto">
 
-				<task-header v-bind:todos="this.todos" v-bind:date="dateNow" v-bind:fullname="fullName">
+				<task-header v-bind:changefullname="changeFullName" v-bind:todos="this.todos" v-bind:date="dateNow" v-bind:fullname="fullName">
 
 				</task-header>
 
@@ -234,6 +234,8 @@
 
 				props: {
 
+					changefullname: Function,
+
 					todos: Array,
 
 					date: String,
@@ -248,9 +250,9 @@
 
 						<li class="collection-header">
 
-							<h5>
+							<h5 v-on:click="changefullname">
 
-								Hello, {{ fullname }}
+								Good day, {{ fullname }}
 
 							</h5>
 
@@ -519,6 +521,18 @@
 
 						localStorage["todos"] = JSON.stringify(TodosDB)
 
+					},
+
+					firstName(firstNameDB) {
+
+						localStorage["firstName"] = JSON.stringify(firstNameDB)
+
+					},
+
+					lastName(lastNameDB) {
+
+						localStorage["lastName"] = JSON.stringify(lastNameDB)
+
 					}
 
 				},
@@ -541,7 +555,7 @@
 
 						var input = document.getElementById("textarea1").value.trim()
 
-						if ( input != "" && input != null ) {
+						if (input) {
 
 							this.todos.unshift({ task: input })
 
@@ -559,7 +573,7 @@
 
 						event.preventDefault()
 
-						if ( this.todos != "" && this.todos != null) {
+						if (this.todos) {
 
 							if ( confirm("Do you really want to remove all your tasks?") ) {
 
@@ -586,6 +600,24 @@
 						} else {
 
 							alert("Lost internet connection!")
+
+							return false
+
+						}
+
+					},
+
+					changeFullName: function() {
+
+						var input = prompt("Enter your name", this.fullName)
+
+						if (input) {
+
+							this.firstName = input.split(" ")[0]
+
+							this.lastName = input.split(" ")[1]
+
+						} else {
 
 							return false
 
@@ -666,6 +698,18 @@
 					if (localStorage.todos) {
 
 						this.todos = JSON.parse(localStorage["todos"])
+
+					}
+
+					if (localStorage.firstName) {
+
+						this.firstName = JSON.parse(localStorage["firstName"])
+
+					}
+
+					if (localStorage.lastName) {
+
+						this.lastName = JSON.parse(localStorage["lastName"])
 
 					}
 
