@@ -627,9 +627,17 @@
 
 					search: function() {
 
-						var search = prompt("Write text for search")
+						var input = prompt("Write text for search")
 
-						window.find(search)
+						if (input) {
+
+							window.find(input)
+
+						} else {
+
+							return false
+
+						}
 
 					},
 
