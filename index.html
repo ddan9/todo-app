@@ -90,7 +90,7 @@
 
 				</task-list>
 
-				<form-task v-bind:addtask="addTask" v-bind:todos="this.todos" v-bind:clear="clear">
+				<form-task v-bind:addtask="addTask" v-bind:scrollfocused="scrollFocused" v-bind:todos="this.todos" v-bind:clear="clear">
 
 				</form-task>
 
@@ -312,6 +312,8 @@
 
 					addtask: Function,
 
+					scrollfocused: Function,
+
 					todos: Array,
 
 					clear: Function
@@ -328,7 +330,7 @@
 
 								<div class="input-field col s12">
 
-									<textarea id="textarea1" class="materialize-textarea" v-on:keydown.enter="addtask" autofocus="autofocus"></textarea>
+									<textarea id="textarea1" class="materialize-textarea" v-on:keydown.enter="addtask" v-on:keypress="scrollfocused" autofocus="autofocus"></textarea>
 
 									<label for="textarea1" autofocus="autofocus">
 
@@ -562,6 +564,15 @@
 				},
 
 				methods: {
+
+					scrollFocused: function() {
+
+						var textarea = document.getElementById("textarea1")
+
+						textarea.scrollIntoView({block: "center", inline: "center", behavior: "smooth"})
+
+
+					},
 
 					loadingHide: function() {
 
