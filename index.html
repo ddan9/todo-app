@@ -567,9 +567,7 @@
 
 					scrollFocused: function() {
 
-						var textarea = document.getElementById("textarea1")
-
-					//	textarea.scrollIntoView({block: "center", inline: "center", behavior: "smooth"})
+						document.getElementById("textarea1").scrollIntoView({block: "start", inline: "nearest", behavior: "smooth"})
 
 
 					},
@@ -590,7 +588,7 @@
 
 						var textarea = document.getElementById("textarea1")
 
-						textarea.scrollIntoView({block: "center", inline: "center", behavior: "smooth"})
+						textarea.scrollIntoView({block: "start", inline: "nearest", behavior: "smooth"})
 
 						textarea.focus()
 
