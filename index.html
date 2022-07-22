@@ -380,7 +380,7 @@
 
 				template: `
 
-					<div v-if="todos.length > 10" style="z-index: 500; display: block; position: fixed; right: 3vh; bottom: 6vh">
+					<div v-if="todos.length > 10" style="z-index: 500; display: block; position: fixed; right: 2vh; bottom: 2vh">
 
 						<a v-on:click="changestatement" class="btn-floating btn-large waves-effect waves-light teal lighten-2">
 
@@ -563,13 +563,17 @@
 
 							this.loadingShow = false
 
-						}, 2500 )
+						}, 1500 )
 
 					},
 
 					addTask: function() {
 
 						event.preventDefault()
+
+						document.getElementById("textarea1").focus()
+
+						document.getElementById("textarea1").select()
 
 						var input = document.getElementById("textarea1").value.trim()
 
@@ -683,7 +687,7 @@
 
 						event.preventDefault()
 
-						if ( confirm("Remove task: \" " + this.todos[index].task + " \" ?") ) {
+						if ( confirm("Remove task: \"" + this.todos[index].task + "\"?") ) {
 
 							this.todos.splice(index, 1)
 
