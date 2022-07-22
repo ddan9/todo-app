@@ -569,15 +569,17 @@
 
 					addTask: function() {
 
+						var textarea = document.getElementById("textarea1")
+
 						event.preventDefault()
 
-						document.getElementById("textarea1").focus()
+						textarea.scrollIntoView({behavior: "smooth"})
 
-						document.getElementById("textarea1").select()
+						textarea.focus()
 
-						window.scrollTo({top: document.body.scrollHeight, behavior: "smooth"});
+						textarea.select()
 
-						var input = document.getElementById("textarea1").value.trim()
+						var input = textarea.value.trim()
 
 						if (input) {
 
@@ -589,11 +591,11 @@
 
 						}
 
-						document.getElementById("textarea1").value = ""
+						textarea.value = ""
 
-						document.getElementById("textarea1").focus()
+						textarea.focus()
 
-						document.getElementById("textarea1").select()
+						textarea.select()
 
 					},
 
