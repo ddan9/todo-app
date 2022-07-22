@@ -50,6 +50,12 @@
 
 		<style>
 
+			html {
+
+				scroll-behavior: smooth;
+
+			}
+
 			.fade-leave-active {
 
 				transition: opacity 0.5s;
@@ -66,9 +72,9 @@
 
 	</head>
 
-	<body style="display: flex; min-height: 100vh; flex-direction: column">
+	<body style="display: flex; min-height: 100vh; flex-direction: column; scroll-behavior: smooth">
 
-		<div class="app" id="app" style="display: flex; min-height: 100vh; flex-direction: column">
+		<div class="app" id="app" style="display: flex; min-height: 100vh; flex-direction: column; scroll-behavior: smooth">
 
 			<app-loading v-bind:loadingshow="loadingShow">
 
