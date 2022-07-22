@@ -569,11 +569,11 @@
 
 					addTask: function() {
 
-						var textarea = document.getElementById("textarea1")
-
 						event.preventDefault()
 
-						textarea.scrollIntoView({behavior: "smooth"})
+						var textarea = document.getElementById("textarea1")
+
+						textarea.scrollIntoView({block: "center", inline: "center", behavior: "smooth"})
 
 						textarea.focus()
 
