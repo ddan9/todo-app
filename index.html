@@ -330,7 +330,7 @@
 
 								<div class="input-field col s12">
 
-									<textarea id="textarea1" class="materialize-textarea" v-on:keydown.enter="addtask" v-on:keypress="scrollfocused" autofocus="autofocus"></textarea>
+									<textarea id="textarea1" class="materialize-textarea" v-on:keydown.enter="addtask" v-on:keypress="scrollfocused" v-on:click="scrollfocused" autofocus="autofocus"></textarea>
 
 									<label for="textarea1" autofocus="autofocus">
 
@@ -567,7 +567,7 @@
 
 					scrollFocused: function() {
 
-						document.getElementById("textarea1").scrollIntoView({block: "center", inline: "center", behavior: "smooth"})
+						document.getElementById("textarea1").scrollIntoView({block: "start", inline: "nearest", behavior: "smooth"})
 
 
 					},
@@ -588,7 +588,7 @@
 
 						var textarea = document.getElementById("textarea1")
 
-						textarea.scrollIntoView({block: "center", inline: "center", behavior: "smooth"})
+						textarea.scrollIntoView({block: "start", inline: "nearest", behavior: "smooth"})
 
 						textarea.focus()
 
