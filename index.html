@@ -56,13 +56,19 @@
 
 			}
 
+			.fade-enter-active {
+
+				transition: opacity 0.2s;
+
+			}
+
 			.fade-leave-active {
 
 				transition: opacity 0.5s;
 
 			}
 
-			.fade-leave-to {
+			.fade-enter, .fade-leave-to {
 
 				opacity: 0;
 
@@ -79,6 +85,10 @@
 			<app-loading v-bind:loadingshow="loadingShow">
 
 			</app-loading>
+
+			<app-unloader v-bind:unloadershow="unloaderShow">
+
+			</app-unloader>
 
 			<custom-navbar v-bind:search="search" v-bind:reload="reload">
 
@@ -155,6 +165,28 @@
 								</div>
 
 							</div>
+
+						</div>
+
+					</transition>
+
+				`
+
+			})
+
+			Vue.component("app-unloader", {
+
+				props: {
+
+					unloadershow: Boolean
+
+				},
+
+				template: `
+
+					<transition name="fade">
+
+						<div v-show="unloadershow" style="z-index: 999; background: white; position: fixed; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center">
 
 						</div>
 
@@ -535,6 +567,8 @@
 
 					loadingShow: true,
 
+					unloaderShow: false,
+
 					statement: "arrow_downward",
 
 					todos: [ ]
@@ -558,6 +592,30 @@
 					lastName(lastNameDB) {
 
 						localStorage["lastName"] = JSON.stringify(lastNameDB)
+
+					},
+
+					unloaderShow: {
+
+						handler(unloaderShow) {
+
+							if (this.unloaderShow) {
+
+								setTimeout(() => {
+
+									this.unloaderShow = false
+
+								}, 2000 )
+
+							} else {
+
+								return false
+
+							}
+
+						},
+
+						deep: true
 
 					}
 
@@ -642,6 +700,8 @@
 
 						if (navigator.onLine) {
 
+							this.unloaderShow = true
+
 							document.location.href = event.currentTarget.href
 
 						} else {
@@ -693,6 +753,8 @@
 						event.preventDefault()
 
 						if (navigator.onLine) {
+
+							this.unloaderShow = true
 
 							document.location.reload()
 
