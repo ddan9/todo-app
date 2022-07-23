@@ -96,7 +96,7 @@
 
 			<main style="flex: 1 0 auto">
 
-				<task-list v-bind:changefullname="changeFullName" v-bind:todos="this.todos" v-bind:date="dateNow" v-bind:fullname="fullName" v-bind:greetingtime="greetingTime" v-bind:removetask="removeTask">
+				<task-list v-bind:changefullname="changeFullName" v-bind:todos="this.todos" v-bind:date="dateNow" v-bind:fullname="fullName" v-bind:greetingtime="greetingTime" v-bind:removetask="removeTask" v-bind:edittask="editTask">
 
 				</task-list>
 
@@ -282,7 +282,9 @@
 
 					greetingtime: String,
 
-					removetask: Function
+					removetask: Function,
+
+					edittask: Function
 
 				},
 
@@ -314,11 +316,25 @@
 
 						<li v-for="(todo, index) in todos" class="collection-item" style="overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; white-space: normal">
 
-							<div>
+							<div class="row valign-wrapper">
 
-								{{ todo.task }}
+								<div class="col s10 container left">
 
-								<a v-on:click="removetask(index)" href="#!" class="secondary-content">
+									{{ todo.task }}
+
+								</div>
+
+								<a class="col s1" v-on:click="edittask(index)" href="#!" class="secondary-content">
+
+									<i class="material-icons">
+
+										edit
+
+									</i>
+
+								</a>
+
+								<a class="col s1" v-on:click="removetask(index)" href="#!" class="secondary-content" style="margin-left: 1vh">
 
 									<i class="material-icons">
 
@@ -780,6 +796,24 @@
 						if ( confirm("Remove task: \"" + this.todos[index].task + "\"?") ) {
 
 							this.todos.splice(index, 1)
+
+						} else {
+
+							return false
+
+						}
+
+					},
+
+					editTask: function(index) {
+
+						event.preventDefault()
+
+						var input = prompt("Edit this task?", this.todos[index].task)
+
+						if (input) {
+
+							this.todos[index].task = input
 
 						} else {
 
