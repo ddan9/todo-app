@@ -6,7 +6,7 @@
 
 		<title>
 
-			ddan9 | TODO
+			TODO
 
 		</title>
 
@@ -362,7 +362,7 @@
 
 								<div class="input-field col s12">
 
-									<textarea id="textarea1" class="materialize-textarea" v-on:keydown.enter="addtask" v-on:keypress="scrollfocused" v-on:click="scrollfocused" autofocus="autofocus"></textarea>
+									<textarea id="textarea1" class="materialize-textarea" v-on:keydown.enter="addtask" v-on:keypress="scrollfocused" v-on:keydown="scrollfocused" v-on:click="scrollfocused" autofocus="autofocus"></textarea>
 
 									<label for="textarea1" autofocus="autofocus">
 
@@ -420,7 +420,7 @@
 
 				template: `
 
-					<div v-if="todos.length > 10" style="z-index: 500; display: block; position: fixed; right: 2vh; bottom: 2vh">
+					<div v-if="todos.length > 20" style="z-index: 500; display: block; position: fixed; right: 2vh; bottom: 2vh">
 
 						<a v-on:click="changestatement" class="btn-floating btn-large waves-effect waves-light teal lighten-2">
 
@@ -666,6 +666,8 @@
 
 						textarea.value = ""
 
+						textarea.value.trim()
+
 						textarea.focus()
 
 						textarea.select()
@@ -676,11 +678,17 @@
 
 						event.preventDefault()
 
+						var textarea = document.getElementById("textarea1")
+
 						if (this.todos) {
 
 							if ( confirm("Do you really want to remove all your tasks?") ) {
 
 								this.todos = [ ]
+
+								textarea.value = ""
+
+								textarea.value.trim()
 
 							} else {
 
