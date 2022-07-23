@@ -813,7 +813,7 @@
 
 						if (input) {
 
-							this.todos[index].task = input
+							this.todos.splice(index, 1, {task: input})
 
 						} else {
 
