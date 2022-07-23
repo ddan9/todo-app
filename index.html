@@ -386,17 +386,21 @@
 
 									</label>
 
-								  	<button v-if="todos.length > 0" v-on:click="clear" class="btn waves-effect waves-light left" type="submit" name="action">
+									<transition name="fade">
 
-								  		Clean up
+									  	<button v-if="todos.length > 2" v-on:click="clear" class="btn waves-effect waves-light left" type="submit" name="action">
 
-										<i class="material-icons right">
+									  		Clean up
 
-											delete
+											<i class="material-icons right">
 
-										</i>
+												delete
 
-									</button>
+											</i>
+
+										</button>
+
+									</transition>
 
 									<button v-on:click="addtask" class="btn waves-effect waves-light right" type="submit" name="action">
 
@@ -488,11 +492,15 @@
 
 									</p>
 
-									<p v-if="todos.length < 1" class="grey-text text-lighten-4">
+									<transition name="fade">
 
-										You can enter your tasks here
+										<p v-if="todos.length < 1" class="grey-text text-lighten-4">
 
-									</p>
+											You can enter your tasks here
+
+										</p>
+
+									</transition>
 
 								</div>
 
