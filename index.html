@@ -296,7 +296,7 @@
 
 							<h5 v-on:click="changefullname">
 
-								Good {{ greetingtime }}, {{ fullname }}
+								Good {{ greetingtime + fullname }}
 
 							</h5>
 
@@ -585,9 +585,9 @@
 
 					title: "TODO",
 
-					firstName: "Name",
+					firstName: ", Your",
 
-					lastName: "Patronymic",
+					lastName: "Name",
 
 					loadingShow: true,
 
@@ -747,13 +747,39 @@
 
 					changeFullName: function() {
 
-						var input = prompt("Enter your name", this.fullName)
+						var input = prompt("Enter your name", this.fullName.replace(/\, /g, ""))
 
-						if (input) {
+						if (input != null) {
 
-							this.firstName = input.split(" ")[0]
+							input = input.replace(/ +/g, " ").trim()
 
-							this.lastName = input.split(" ")[1]
+							var sinput = input.split(" ")
+
+							if (sinput[0]) {
+
+								this.firstName = ", " + sinput[0]
+
+							} else {
+
+								this.firstName = ""
+
+							}
+
+							if (sinput.length > 1) {
+
+								this.lastName = sinput[1]
+
+								for (var i = 2; i < sinput.length; i++) {
+
+									this.lastName += " " + sinput[i]
+
+								}
+
+							} else {
+
+								this.lastName = ""
+
+							}
 
 						} else {
 
