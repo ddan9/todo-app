@@ -294,23 +294,27 @@
 
 						<li class="collection-header">
 
-							<h5 v-on:click="changefullname">
+							<div class="container">
 
-								Good {{ greetingtime + fullname }}
+								<h5 v-on:click="changefullname">
 
-							</h5>
+									Good {{ greetingtime + fullname }}
 
-							<h6>
+								</h5>
 
-								Today: {{ date }}
+								<h6>
 
-							</h6>
+									Today: {{ date }}
 
-							<h6>
+								</h6>
 
-								Tasks: {{ todos.length }}
+								<h6>
 
-							</h6>
+									Tasks: {{ todos.length }}
+
+								</h6>
+
+							</div>
 
 						</li>
 
@@ -370,7 +374,7 @@
 
 				template: `
 
-					<div class="row">
+					<div class="row container">
 
 						<form class="col s12">
 
