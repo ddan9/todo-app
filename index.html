@@ -647,6 +647,50 @@
 
 				methods: {
 
+					swapTask: function(index, route) {
+
+						if (route == "up") {
+
+							if (index > 0 && index < this.todos.length) {
+
+								var currentTask = this.todos[index].task
+
+								var replaceTask = this.todos[index-1].task
+
+								this.todos.splice(index, 1, {task: replaceTask})
+
+								this.todos.splice(index-1, 1, {task: currentTask})
+
+							} else {
+
+								return false
+
+							}
+
+						}
+
+						if (route == "down") {
+
+							if (index > -1 && index < this.todos.length-1) {
+
+								var currentTask = this.todos[index].task
+
+								var replaceTask = this.todos[index+1].task
+
+								this.todos.splice(index, 1, {task: replaceTask})
+
+								this.todos.splice(index+1, 1, {task: currentTask})
+
+							} else {
+
+								return false
+
+							}
+
+						}
+
+					},
+
 					scrollFocused: function() {
 
 						var textarea = document.getElementById("textarea1")
