@@ -585,7 +585,7 @@
 
 					title: "TODO",
 
-					firstName: ", Your",
+					firstName: "Your",
 
 					lastName: "Name",
 
@@ -757,7 +757,7 @@
 
 							if (sinput[0]) {
 
-								this.firstName = ", " + sinput[0]
+								this.firstName = sinput[0]
 
 							} else {
 
@@ -935,7 +935,15 @@
 
 					fullName: function() {
 
-						return this.firstName + " " + this.lastName
+						if (this.firstName) {
+
+							return ", " + this.firstName + " " + this.lastName
+
+						} else {
+
+							return this.firstName + " " + this.lastName
+
+						}
 
 					}
 
