@@ -96,7 +96,7 @@
 
 			<main style="flex: 1 0 auto">
 
-				<task-list v-bind:changefullname="changeFullName" v-bind:todos="this.todos" v-bind:date="dateNow" v-bind:fullname="fullName" v-bind:greetingtime="greetingTime" v-bind:removetask="removeTask" v-bind:edittask="editTask">
+				<task-list v-bind:dropdowninit="dropdownInitialize" v-bind:showswapbutton="showSwapButton" v-bind:swaptask="swapTask" v-bind:changefullname="changeFullName" v-bind:todos="this.todos" v-bind:date="dateNow" v-bind:fullname="fullName" v-bind:greetingtime="greetingTime" v-bind:removetask="removeTask" v-bind:edittask="editTask">
 
 				</task-list>
 
@@ -284,7 +284,13 @@
 
 					removetask: Function,
 
-					edittask: Function
+					edittask: Function,
+
+					showswapbutton: Function,
+
+					swaptask: Function,
+
+					dropdowninit: Function
 
 				},
 
@@ -322,31 +328,97 @@
 
 							<div class="row valign-wrapper container" style="padding-bottom: 0; margin-bottom: 2vh; margin-top: 1vh">
 
-								<div class="col s10 container left">
+								<div class="col s11 container left">
 
 									{{ todo.task }}
 
 								</div>
 
-								<a class="col s1" v-on:click="edittask(index)" href="#!" class="secondary-content">
+								<a class='dropdown-trigger secondary-content' v-on:click.once.capture="dropdowninit" href='#' v-bind:["data-target"]="'dropdown-' + index">
 
 									<i class="material-icons">
 
-										edit
+										more_horiz
 
 									</i>
 
 								</a>
 
-								<a class="col s1" v-on:click="removetask(index)" href="#!" class="secondary-content" style="margin-left: 1vh">
+								<ul v-bind:["id"]="'dropdown-' + index" class='dropdown-content'>
 
-									<i class="material-icons">
+									<li v-show="showswapbutton(index, 'up')">
 
-										delete
+										<a v-on:click="swaptask(index, 'up')" href="#!">
 
-									</i>
+											<i class="material-icons">
 
-								</a>
+												move_up
+
+											</i>
+
+											Move up
+
+										</a>
+
+									</li>
+
+									<li class="divider" tabindex="-1">
+
+									</li>
+
+									<li>
+
+										<a v-on:click="edittask(index)" href="#!">
+
+											<i class="material-icons">
+
+												edit
+
+											</i>
+
+											Edit
+
+										</a>
+
+									</li>
+
+									<li>
+
+										<a v-on:click="removetask(index)" href="#!">
+
+											<i class="material-icons">
+
+												delete
+
+											</i>
+
+											Delete
+
+										</a>
+
+									</li>
+
+									<li class="divider" tabindex="-1">
+
+									</li>
+
+									<li v-show="showswapbutton(index, 'down')">
+
+										<a v-on:click="swaptask(index, 'down')" href="#!">
+
+											<i class="material-icons">
+
+												move_down
+
+											</i>
+
+											Move down
+
+										</a>
+
+									</li>
+
+								</ul>
 
 							</div>
 
@@ -382,9 +454,9 @@
 
 								<div class="input-field col s12">
 
-									<textarea id="textarea1" class="materialize-textarea" v-on:keydown.enter="addtask" v-on:keypress="scrollfocused" v-on:keydown="scrollfocused" v-on:click="scrollfocused" autofocus="autofocus"></textarea>
+									<textarea id="textarea1" class="materialize-textarea" v-on:keydown.enter="addtask" v-on:keypress="scrollfocused" v-on:keydown="scrollfocused" v-on:click="scrollfocused"></textarea>
 
-									<label for="textarea1" autofocus="autofocus">
+									<label for="textarea1">
 
 										New task
 
@@ -492,7 +564,7 @@
 
 									<p class="grey-text text-lighten-4">
 
-										Created just while learning Web, <a class="grey-text text-lighten-3" href="https://pages.github.com" v-on:click.stop.prevent="checkconnection"> GH-Pages</a>, <a class="grey-text text-lighten-3" href="https://vuejs.org" v-on:click.stop.prevent="checkconnection"> Vue.js </a> and <a class="grey-text text-lighten-3" href="https://materializecss.com" v-on:click.stop.prevent="checkconnection"> Materialize.css</a>. This simple app will helps you to manage your tasks or just store your notes
+										Created just while learning Web, <a class="grey-text text-lighten-3" href="https://pages.github.com" v-on:click.stop.prevent="checkconnection"> GH-Pages</a>, <a class="grey-text text-lighten-3" href="https://vuejs.org" v-on:click.stop.prevent="checkconnection"> Vue.js </a> and <a class="grey-text text-lighten-3" href="https://materializecss.com" v-on:click.stop.prevent="checkconnection"> Materialize.css</a> with a lot of pain. This simple app will helps you to manage your tasks or just store your notes
 
 									</p>
 
@@ -603,37 +675,15 @@
 
 				},
 
-				watch: {
+				methods: {
 
-					todos(TodosDB) {
+					showSwapButton: function(index, route) {
 
-						localStorage["todos"] = JSON.stringify(TodosDB)
+						if (route == "up") {
 
-					},
+							if (index > 0 && index < this.todos.length) {
 
-					firstName(firstNameDB) {
-
-						localStorage["firstName"] = JSON.stringify(firstNameDB)
-
-					},
-
-					lastName(lastNameDB) {
-
-						localStorage["lastName"] = JSON.stringify(lastNameDB)
-
-					},
-
-					unloaderShow: {
-
-						handler(unloaderShow) {
-
-							if (this.unloaderShow) {
-
-								setTimeout(() => {
-
-									this.unloaderShow = false
-
-								}, 2000 )
+								return true
 
 							} else {
 
@@ -641,15 +691,23 @@
 
 							}
 
-						},
+						}
 
-						deep: true
+						if (route == "down") {
 
-					}
+							if (index > -1 && index < this.todos.length-1) {
 
-				},
+								return true
 
-				methods: {
+							} else {
+
+								return false
+
+							}
+
+						}
+
+					},
 
 					swapTask: function(index, route) {
 
@@ -917,6 +975,66 @@
 
 						}
 
+					},
+
+					materializeComponentsInitialization: function() {
+
+						M.AutoInit()
+
+						document.addEventListener('DOMContentLoaded', function() {
+
+							var elems = document.querySelectorAll('.dropdown-trigger')
+
+							var options = {
+
+								constrainWidth: false,
+
+								closeOnClick: false
+
+							}
+
+							var instances = M.Dropdown.init(elems, options)
+
+						})
+
+					},
+
+					databasesInitialization: function() {
+
+						if (localStorage.todos) {
+
+							this.todos = JSON.parse(localStorage["todos"])
+
+						}
+
+						if (localStorage.firstName) {
+
+							this.firstName = JSON.parse(localStorage["firstName"])
+
+						}
+
+						if (localStorage.lastName) {
+
+							this.lastName = JSON.parse(localStorage["lastName"])
+
+						}
+
+					},
+
+					dropdownInitialize: function() {
+
+						var elem = event.srcElement.parentElement.parentElement.parentElement.querySelectorAll(".dropdown-trigger")
+
+						var options = {
+
+							constrainWidth: false,
+
+							closeOnClick: false
+
+						}
+
+						var instance = M.Dropdown.init(elem, options)
+
 					}
 
 				},
@@ -997,6 +1115,52 @@
 
 				},
 
+				watch: {
+
+					todos(TodosDB) {
+
+						localStorage["todos"] = JSON.stringify(TodosDB)
+
+					},
+
+					firstName(firstNameDB) {
+
+						localStorage["firstName"] = JSON.stringify(firstNameDB)
+
+					},
+
+					lastName(lastNameDB) {
+
+						localStorage["lastName"] = JSON.stringify(lastNameDB)
+
+					},
+
+					unloaderShow: {
+
+						handler(unloaderShow) {
+
+							if (this.unloaderShow) {
+
+								setTimeout(() => {
+
+									this.unloaderShow = false
+
+								}, 2000 )
+
+							} else {
+
+								return false
+
+							}
+
+						},
+
+						deep: true
+
+					}
+
+				},
+
 				created: function() {
 
 					console.log("Hello there! \nSeems like all is ok :) \nWelcome!")
@@ -1007,25 +1171,9 @@
 
 				mounted() {
 
-					if (localStorage.todos) {
+					this.databasesInitialization()
 
-						this.todos = JSON.parse(localStorage["todos"])
-
-					}
-
-					if (localStorage.firstName) {
-
-						this.firstName = JSON.parse(localStorage["firstName"])
-
-					}
-
-					if (localStorage.lastName) {
-
-						this.lastName = JSON.parse(localStorage["lastName"])
-
-					}
-
-					document.getElementById("textarea1").focus()
+					this.materializeComponentsInitialization()
 
 					this.loadingHide()
 
