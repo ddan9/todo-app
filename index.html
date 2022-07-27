@@ -96,7 +96,7 @@
 
 			<main style="flex: 1 0 auto">
 
-				<task-list v-bind:dropdowninit="dropdownInitialize" v-bind:showswapbutton="showSwapButton" v-bind:swaptask="swapTask" v-bind:changefullname="changeFullName" v-bind:todos="this.todos" v-bind:date="dateNow" v-bind:fullname="fullName" v-bind:greetingtime="greetingTime" v-bind:removetask="removeTask" v-bind:edittask="editTask">
+				<task-list v-bind:selectelement="selectElement" v-bind:dropdowninit="dropdownInitialize" v-bind:showswapbutton="showSwapButton" v-bind:swaptask="swapTask" v-bind:changefullname="changeFullName" v-bind:todos="this.todos" v-bind:date="dateNow" v-bind:fullname="fullName" v-bind:greetingtime="greetingTime" v-bind:removetask="removeTask" v-bind:edittask="editTask">
 
 				</task-list>
 
@@ -290,7 +290,9 @@
 
 					swaptask: Function,
 
-					dropdowninit: Function
+					dropdowninit: Function,
+
+					selectelement: Function
 
 				},
 
@@ -324,7 +326,7 @@
 
 						</li>
 
-						<li v-for="(todo, index) in todos" class="collection-item" style="overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; white-space: normal; padding-bottom: 0; margin-bottom: 0; padding-left: 1vh; padding-right: 0">
+						<li v-for="(todo, index) in todos" v-bind:["id"]="'collection-element-' + index" class="collection-item" style="overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; white-space: normal; padding-bottom: 0; margin-bottom: 0; padding-left: 1vh; padding-right: 0">
 
 							<div class="row valign-wrapper container" style="padding-bottom: 0; margin-bottom: 2vh; margin-top: 1vh">
 
@@ -334,7 +336,7 @@
 
 								</div>
 
-								<a class='dropdown-trigger secondary-content' v-on:click.once.capture="dropdowninit" href='#' v-bind:["data-target"]="'dropdown-' + index">
+								<a class='dropdown-trigger secondary-content' v-on:click.once.capture="dropdowninit(index)" v-on:click="selectelement(index)" href='#' v-bind:["id"]="'button-dropdown-' + index" v-bind:["data-activates"]="'dropdown-' + index" v-bind:["data-target"]="'dropdown-' + index">
 
 									<i class="material-icons">
 
@@ -1021,9 +1023,9 @@
 
 					},
 
-					dropdownInitialize: function() {
+					dropdownInitialize: function(index) {
 
-						var elem = event.srcElement.parentElement.parentElement.parentElement.querySelectorAll(".dropdown-trigger")
+						var elem = document.getElementById("collection-element-" + index).querySelectorAll(".dropdown-trigger")
 
 						var options = {
 
@@ -1034,6 +1036,20 @@
 						}
 
 						var instance = M.Dropdown.init(elem, options)
+
+					},
+
+					selectElement: function(index) {
+
+						setTimeout(() => {
+
+							if (document.getElementById("button-dropdown-" + index).M_Dropdown.isOpen) {
+
+								document.getElementById("collection-element-" + index).style.background = "white"
+
+							}
+
+						}, 0 )
 
 					}
 
