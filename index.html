@@ -336,7 +336,7 @@
 
 								</div>
 
-								<a class='dropdown-trigger secondary-content' v-on:click.once.capture="dropdowninit(index)" v-on:click="selectelement(index)" href='#' v-bind:["id"]="'button-dropdown-' + index" v-bind:["data-activates"]="'dropdown-' + index" v-bind:["data-target"]="'dropdown-' + index">
+								<a class='dropdown-trigger secondary-content' v-on:click.once.capture="dropdowninit(index)" href='#' v-bind:["id"]="'button-dropdown-' + index" v-bind:["data-activates"]="'dropdown-' + index" v-bind:["data-target"]="'dropdown-' + index">
 
 									<i class="material-icons">
 
@@ -346,7 +346,7 @@
 
 								</a>
 
-								<ul v-bind:["id"]="'dropdown-' + index" class='dropdown-content'>
+								<ul v-on:focus="selectelement(index, true)" v-on:blur="selectelement(index, false)" v-bind:["id"]="'dropdown-' + index" class='dropdown-content'>
 
 									<li v-show="showswapbutton(index, 'up')">
 
@@ -989,9 +989,7 @@
 
 							var options = {
 
-								constrainWidth: false,
-
-								closeOnClick: false
+								constrainWidth: false
 
 							}
 
@@ -1029,9 +1027,7 @@
 
 						var options = {
 
-							constrainWidth: false,
-
-							closeOnClick: false
+							constrainWidth: false
 
 						}
 
@@ -1039,17 +1035,19 @@
 
 					},
 
-					selectElement: function(index) {
+					selectElement: function(index, statement) {
 
-						setTimeout(() => {
+						if (statement == true) {
 
-							if (document.getElementById("button-dropdown-" + index).M_Dropdown.isOpen) {
+							document.getElementById("collection-element-" + index).style.background = "whiteSmoke"
 
-								document.getElementById("collection-element-" + index).style.background = "white"
+						}
 
-							}
+						if (statement == false) {
 
-						}, 0 )
+							document.getElementById("collection-element-" + index).style.background = "white"
+
+						}
 
 					}
 
