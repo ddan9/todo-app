@@ -80,6 +80,10 @@
 
 			}
 
+			.flip-list-move {
+  transition: transform 1s;
+}
+
 		</style>
 
 	</head>
@@ -304,7 +308,7 @@
 
 				template: `
 
-					<ul class="collection with-header">
+					<ul class="collection with-header" id="collection">
 
 						<li class="collection-header">
 
@@ -376,22 +380,6 @@
 
 									<li>
 
-										<a v-on:click="edittask(index)" href="#!">
-
-											<i class="material-icons">
-
-												edit
-
-											</i>
-
-											Edit
-
-										</a>
-
-									</li>
-
-									<li>
-
 										<a v-on:click="removetask(index)" href="#!">
 
 											<i class="material-icons">
@@ -401,6 +389,22 @@
 											</i>
 
 											Delete
+
+										</a>
+
+									</li>
+
+									<li>
+
+										<a v-on:click="edittask(index)" href="#!">
+
+											<i class="material-icons">
+
+												edit
+
+											</i>
+
+											Edit
 
 										</a>
 
@@ -677,6 +681,8 @@
 
 					unloaderShow: false,
 
+					previousSearch: "",
+
 					statement: "arrow_downward",
 
 					todos: [ ]
@@ -905,9 +911,11 @@
 
 					search: function() {
 
-						var input = prompt("Write text for search")
+						var input = prompt("Write text for search", this.previousSearch)
 
 						if (input) {
+
+							this.previousSearch = input
 
 							window.find(input)
 
