@@ -21,7 +21,6 @@
 
 - настройки как отдельная часть, по-нормальному
 - темы в настройках
-- multiple locales? or fix auto translate
 
 <br/>
 
