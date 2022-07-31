@@ -721,6 +721,8 @@
 
 					swapTask: function(index, route) {
 
+						event.preventDefault()
+
 						if (route == "up") {
 
 							if (index > 0 && index < this.todos.length) {
@@ -865,6 +867,8 @@
 
 					changeFullName: function() {
 
+						event.preventDefault()
+
 						var input = prompt("Enter your name", this.fullName.replace(/\, /g, ""))
 
 						if (input != null) {
@@ -908,6 +912,8 @@
 					},
 
 					search: function() {
+
+						event.preventDefault()
 
 						var input = prompt("Write text for search", this.previousSearch)
 
