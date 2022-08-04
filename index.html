@@ -332,7 +332,7 @@
 
 						</li>
 
-						<li v-for="(todo, index) in todos" tabindex="0" v-on:focus="selectelement(index, true)" v-on:blur="selectelement(index, false)" v-bind:["id"]="'collection-element-' + index" class="collection-item collection-background-transition" style="overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; white-space: normal; padding-bottom: 0; margin-bottom: 0; padding-left: 1vh; padding-right: 0">
+						<li v-for="(todo, index) in todos" tabindex="-1" v-on:focus="selectelement(index, true)" v-on:blur="selectelement(index, false)" v-bind:["id"]="'collection-element-' + index" class="collection-item collection-background-transition" style="overflow: hidden; overflow-wrap: break-word; word-wrap: break-word; white-space: normal; padding-bottom: 0; margin-bottom: 0; padding-left: 1vh; padding-right: 0">
 
 							<div class="row valign-wrapper container" style="padding-bottom: 0; margin-bottom: 2vh; margin-top: 1vh">
 
