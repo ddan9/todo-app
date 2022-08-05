@@ -116,7 +116,7 @@
 
 			</main>
 
-			<custom-footer v-bind:checkconnection="checkConnection" v-bind:todos="this.todos" v-bind:date="dateNow">
+			<custom-footer v-bind:checkconnection="checkConnection" v-bind:todos="this.todos" v-bind:date="dateNow" v-bind:currenttip="currentTip">
 
 			</custom-footer>
 
@@ -558,7 +558,9 @@
 
 					todos: Array,
 
-					date: String
+					date: String,
+
+					currenttip: String
 
 				},
 
@@ -649,6 +651,20 @@
 
 								</div>
 
+								<div class="col s12">
+
+									<transition name="fade">
+
+										<p class="center grey-text text-lighten-4">
+
+											{{ currenttip }}
+
+										</p>
+
+									</transition>
+
+								</div>
+
 							</div>
 
 						</div>
@@ -690,6 +706,18 @@
 					statement: "arrow_downward",
 
 					toggleFocusElement: false,
+
+					tips: [
+
+						"Nice day today, isn't it?",
+
+						"Click add button for add a task",
+
+						"If you find a bug please let me know"
+
+					],
+
+					currentTip: null,
 
 					todos: [ ]
 
@@ -1101,6 +1129,12 @@
 
 						}
 
+					},
+
+					getRandomInt: function(max) {
+
+						return Math.floor(Math.random() * max);
+
 					}
 
 				},
@@ -1240,6 +1274,14 @@
 					this.databasesInitialization()
 
 					this.materializeComponentsInitialization()
+
+					this.currentTip = this.tips[this.getRandomInt(this.tips.length)]
+
+					setInterval(() => {
+
+						this.currentTip = this.tips[this.getRandomInt(this.tips.length)]
+
+					}, 600*1000 )
 
 					if (navigator.onLine) {
 
