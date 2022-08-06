@@ -1291,11 +1291,17 @@
 
 					setInterval(() => {
 
-						footerTip.style.opacity = 0
+						var randomTip = this.tips[this.getRandomInt(this.tips.length)]
+
+						if (this.currentTip != randomTip) {
+
+							footerTip.style.opacity = 0
+
+						}
 
 						setTimeout(() => {
 
-							this.currentTip = this.tips[this.getRandomInt(this.tips.length)]
+							this.currentTip = randomTip
 
 						}, 500 )
 
