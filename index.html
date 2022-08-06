@@ -1021,13 +1021,27 @@
 
 						event.preventDefault()
 
+						var element = document.getElementById("collection-element-" + index)
+
 						var input = prompt("Edit this task?", this.todos[index].task)
 
 						if (input) {
 
+							setTimeout(() => {
+
+								element.style.background = "white"
+
+							}, 0 )
+
 							this.todos.splice(index, 1, {task: input})
 
 						} else {
+
+							setTimeout(() => {
+
+								element.style.background = "white"
+
+							}, 0 )
 
 							return false
 
