@@ -767,6 +767,8 @@
 
 						event.preventDefault()
 
+						var element = document.getElementById("collection-element-" + index)
+
 						if (route == "up") {
 
 							if (index > 0 && index < this.todos.length) {
@@ -779,7 +781,19 @@
 
 								this.todos.splice(index-1, 1, {task: currentTask})
 
+								setTimeout(() => {
+
+									element.style.background = "white"
+
+								}, 0 )
+
 							} else {
+
+								setTimeout(() => {
+
+									element.style.background = "white"
+
+								}, 0 )
 
 								return false
 
@@ -799,7 +813,19 @@
 
 								this.todos.splice(index+1, 1, {task: currentTask})
 
+								setTimeout(() => {
+
+									element.style.background = "white"
+
+								}, 0 )
+
 							} else {
+
+								setTimeout(() => {
+
+									element.style.background = "white"
+
+								}, 0 )
 
 								return false
 
@@ -1005,11 +1031,25 @@
 
 						event.preventDefault()
 
+						var element = document.getElementById("collection-element-" + index)
+
 						if ( confirm("Remove task: \"" + this.todos[index].task + "\"?") ) {
+
+							setTimeout(() => {
+
+								element.style.background = "white"
+
+							}, 0 )
 
 							this.todos.splice(index, 1)
 
 						} else {
+
+							setTimeout(() => {
+
+								element.style.background = "white"
+
+							}, 0 )
 
 							return false
 
