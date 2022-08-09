@@ -112,7 +112,7 @@
 
 				</task-list>
 
-				<form-task v-bind:addtask="addTask" v-bind:scrollfocused="scrollFocused" v-bind:todos="this.todos" v-bind:clear="clear">
+				<form-task v-bind:addtask="addTask" v-bind:scrollfocused="scrollFocused" v-bind:todos="this.todos" v-bind:clear="clear" v-bind:cleartextarea="clearTextArea">
 
 				</form-task>
 
@@ -454,7 +454,9 @@
 
 					todos: Array,
 
-					clear: Function
+					clear: Function,
+
+					cleartextarea: Function
 
 				},
 
@@ -467,6 +469,12 @@
 							<div class="row">
 
 								<div class="input-field col s12">
+
+									<i v-if="false" v-on:click="cleartextarea" class="tiny material-icons prefix notranslate" translate="no">
+
+										clear
+
+									</i>
 
 									<textarea id="textarea1" class="materialize-textarea" v-on:keydown.enter="addtask" v-on:keypress="scrollfocused" v-on:keydown="scrollfocused" v-on:click="scrollfocused"></textarea>
 
@@ -877,8 +885,6 @@
 
 						}
 
-						textarea.value = " "
-
 						textarea.value = ""
 
 						textarea.value.trim()
@@ -903,8 +909,6 @@
 
 								this.todos = [ ]
 
-								textarea.value = " "
-
 								textarea.value = ""
 
 								textarea.value.trim()
@@ -920,6 +924,24 @@
 						}
 
 						window.scrollTo({top: 0, behavior: "smooth"});
+
+					},
+
+					clearTextArea: function() {
+
+						event.preventDefault()
+
+						var textarea = document.getElementById("textarea1")
+
+						textarea.value = ""
+
+						textarea.value.trim()
+
+						M.textareaAutoResize(textarea)
+
+						textarea.focus()
+
+						textarea.click()
 
 					},
 
