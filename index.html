@@ -112,7 +112,7 @@
 
 				</task-list>
 
-				<form-task v-bind:addtask="addTask" v-bind:scrollfocused="scrollFocused" v-bind:todos="this.todos" v-bind:clear="clear" v-bind:cleartextarea="clearTextArea">
+				<form-task v-bind:addtask="addTask" v-bind:scrollfocused="scrollFocused" v-bind:todos="this.todos" v-bind:clear="clear" v-bind:cleartextarea="clearTextArea" v-bind:cleartextareabutton="clearTextAreaButton" v-bind:cleartextareastate="clearTextAreaState">
 
 				</form-task>
 
@@ -456,7 +456,11 @@
 
 					clear: Function,
 
-					cleartextarea: Function
+					cleartextarea: Function,
+
+					cleartextareabutton: Boolean,
+
+					cleartextareastate: Function
 
 				},
 
@@ -470,13 +474,13 @@
 
 								<div class="input-field col s12">
 
-									<i v-if="false" v-on:click="cleartextarea" class="tiny material-icons prefix notranslate" translate="no">
+									<i v-if="cleartextareabutton" v-on:click="cleartextarea" class="tiny material-icons prefix notranslate" translate="no">
 
 										clear
 
 									</i>
 
-									<textarea id="textarea1" class="materialize-textarea" v-on:keydown.enter="addtask" v-on:keypress="scrollfocused" v-on:keydown="scrollfocused" v-on:click="scrollfocused"></textarea>
+									<textarea id="textarea1" class="materialize-textarea" v-on:keydown.enter="addtask" v-on:keypress="scrollfocused" v-on:keydown="scrollfocused" v-on:keyup="cleartextareastate" v-on:keyup.delete="cleartextareastate" v-on:click="scrollfocused"></textarea>
 
 									<label for="textarea1">
 
@@ -721,6 +725,8 @@
 
 					toggleFocusElement: false,
 
+					clearTextAreaButton: false,
+
 					tips: [
 
 						"Nice day today, isn't it?",
@@ -909,11 +915,17 @@
 
 								this.todos = [ ]
 
+								this.clearTextAreaButton = false
+
 								textarea.value = ""
 
 								textarea.value.trim()
 
 								M.textareaAutoResize(textarea)
+
+								textarea.focus()
+
+								textarea.blur()
 
 							} else {
 
@@ -931,6 +943,8 @@
 
 						event.preventDefault()
 
+						this.clearTextAreaButton = false
+
 						var textarea = document.getElementById("textarea1")
 
 						textarea.value = ""
@@ -942,6 +956,22 @@
 						textarea.focus()
 
 						textarea.click()
+
+					},
+
+					clearTextAreaState: function() {
+
+						var textareaValue = document.getElementById("textarea1").value
+
+						if (textareaValue) {
+
+							this.clearTextAreaButton = true
+
+						} else {
+
+							this.clearTextAreaButton = false
+
+						}
 
 					},
 
