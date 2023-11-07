@@ -116,7 +116,7 @@
 
 				</form-task>
 
-				<float-button v-bind:todos="this.todos" v-bind:changestatement="changeStatement" v-bind:statement="this.statement">
+				<float-button v-bind:todos="this.todos" v-bind:changestatement="changeStatement" v-bind:floatbuttonscroll="floatButtonScroll" v-bind:statement="this.statement">
 
 				</float-button>
 
@@ -543,6 +543,8 @@
 					todos: Array,
 
 					changestatement: Function,
+					
+					floatbuttonscroll: Function,
 
 					statement: String
 
@@ -552,7 +554,7 @@
 
 					<div v-if="todos.length > 20" style="z-index: 500; display: block; position: fixed; right: 2vh; bottom: 2vh">
 
-						<a v-on:click="changestatement" class="btn-floating btn-large waves-effect waves-light teal lighten-2">
+						<a v-on:click="changestatement" v-on:click="floatbuttonscroll" class="btn-floating btn-large waves-effect waves-light teal lighten-2">
 
 							<i class="material-icons notranslate" translate="no">
 
@@ -1155,6 +1157,36 @@
 
 						}
 
+					},
+					
+					floatButtonScroll: function() {
+					
+						switch(this.statement) {
+
+							case "arrow_downward": {
+
+								window.scrollTo({ top: 0, behavior: "smooth" })
+
+								break
+
+							}
+
+							case "arrow_upward": {
+
+								window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" })
+
+								break
+
+							}
+
+							default: {
+
+								break
+
+							}
+
+						}	
+					
 					},
 
 					materializeComponentsInitialization: function() {
