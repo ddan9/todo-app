@@ -9,7 +9,14 @@ self.addEventListener('install', e => {
       return cache.addAll([
         './',
         './index.html',
-        './manifest.json'
+        './manifest.json',
+        './serviceWorker.js',
+        'https://img.icons8.com/stickers/100/000000/task.png',
+        'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css',
+        'https://fonts.googleapis.com/icon?family=Material+Icons',
+        'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js',
+        'https://code.jquery.com/jquery-3.2.1.min.js',
+        'https://cdn.jsdelivr.net/npm/vue@2.7.0',
       ]);
     })
   );
