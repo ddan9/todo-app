@@ -1,4 +1,18 @@
 const cacheName = 'TODO';
+const assets = [
+	'./',
+	'./index.html',
+	'./index.js',
+	'./style.css',
+	'./manifest.json',
+	'./serviceWorker.js',
+	'https://img.icons8.com/stickers/100/000000/task.png',
+	'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css',
+	'https://fonts.googleapis.com/icon?family=Material+Icons',
+	'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js',
+	'https://code.jquery.com/jquery-3.2.1.min.js',
+	'https://cdn.jsdelivr.net/npm/vue@2.7.0'
+]
 
 // Cache all the files to make a PWA
 self.addEventListener('install', e => {
@@ -6,18 +20,7 @@ self.addEventListener('install', e => {
     caches.open(cacheName).then(cache => {
       // Our application only has two files here index.html and manifest.json
       // but you can add more such as style.css as your app grows
-      return cache.addAll([
-        './',
-        './index.html',
-        './manifest.json',
-        './serviceWorker.js',
-        'https://img.icons8.com/stickers/100/000000/task.png',
-        'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css',
-        'https://fonts.googleapis.com/icon?family=Material+Icons',
-        'https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js',
-        'https://code.jquery.com/jquery-3.2.1.min.js',
-        'https://cdn.jsdelivr.net/npm/vue@2.7.0',
-      ]);
+      return cache.addAll(assets);
     })
   );
 });
