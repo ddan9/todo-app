@@ -1,0 +1,9 @@
+{
+  "name": "TODO by ddan9",
+  "short_name": "TODO",
+  "theme_color": "teal",
+  "background_color": "white",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./index.html"
+}

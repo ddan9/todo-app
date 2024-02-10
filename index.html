@@ -30,6 +30,8 @@
 
 		<meta http-equiv="expires" content="Sun, 01 Jan 2122 00:00:01 GMT">
 
+		<link rel="manifest" href="./manifest.json">
+
 		<link rel="icon" type="image/png" href="https://img.icons8.com/stickers/100/000000/task.png">
 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -1280,6 +1282,16 @@
 						}
 
 					},
+					
+					serviceWorkerRegister: function() {
+					
+						if("serviceWorker" in navigator) {
+							
+							navigator.serviceWorker.register("./serviceWorker.js", { scope: "./" })
+						
+						}
+		
+					},
 
 					getRandomInt: function(max) {
 
@@ -1424,6 +1436,8 @@
 					this.databasesInitialization()
 
 					this.materializeComponentsInitialization()
+
+					this.serviceWorkerRegister()
 
 					var footerTip = document.getElementById("footer-tip")
 
