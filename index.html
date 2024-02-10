@@ -545,7 +545,7 @@
 					todos: Array,
 
 					changestatement: Function,
-					
+
 					floatbuttonscroll: Function,
 
 					statement: String
@@ -1160,9 +1160,9 @@
 						}
 
 					},
-					
+
 					floatButtonScroll: function() {
-					
+
 						switch(this.statement) {
 
 							case "arrow_downward": {
@@ -1187,8 +1187,8 @@
 
 							}
 
-						}	
-					
+						}
+
 					},
 
 					materializeComponentsInitialization: function() {
@@ -1282,15 +1282,15 @@
 						}
 
 					},
-					
+
 					serviceWorkerRegister: function() {
-					
+
 						if("serviceWorker" in navigator) {
-							
+
 							navigator.serviceWorker.register("./serviceWorker.js", { scope: "./" })
-						
+
 						}
-		
+
 					},
 
 					getRandomInt: function(max) {
@@ -1474,6 +1474,8 @@
 					} else {
 
 						alert("Lost internet connection!")
+
+						this.loadingHide()
 
 						return false
 
