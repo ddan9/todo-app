@@ -585,7 +585,7 @@ var app = new Vue({
 
 		lastName: "Name",
 
-		loadingShow: false,
+		loadingShow: true,
 
 		unloaderShow: false,
 
