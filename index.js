@@ -1339,9 +1339,15 @@ var app = new Vue({
 
 		} else {
 
-			alert("Lost internet connection!")
+			if (confirm("No internet connection. Continue?") == true) {
 
-			return false
+				this.loadingHide()
+
+			} else {
+
+				return false
+
+			}
 
 		}
 
