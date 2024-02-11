@@ -1,6 +1,6 @@
 # todo-app
 
-[App: ddan9.github.io/todo-app](https://ddan9.github.io/todo-app)
+App: [ddan9.github.io/todo-app](https://ddan9.github.io/todo-app)
 
 <br/>
 
@@ -10,7 +10,17 @@
 
 <br/>
 
-#### todo:
+#### Features:
+
+- Fully CDN
+- Fully node-less
+- PWA, node-less PWA
+- Nice design
+- Wide functionality
+
+<br/>
+
+#### Todo:
 
 - по кнопке: smooth scroll, скролл до последнего либо первого задания (состояния переключать), скрывать при скроллинге, скрывать пока скролл не в положении списка (либо сделать чтобы она работала как кнопка добавления, пока находится там), скрывать если фокус и ввод
 
